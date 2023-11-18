@@ -33,7 +33,36 @@
             </div>
           </nav>
     </header>
-    <main></main>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 justify-content-center">
+                    <form method="POST" action="/disciplina" th:object="${disciplina}">
+                        <div class="mb-3">
+                            <label for="id" class="form-label">Código</label>
+                            <input id="id"
+                                   type="text"
+                                   readonly
+                                   class="form-control-plaintext"
+                                   name="id"
+                                   th:value="${disciplina.id}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome da Disciplina</label>
+                            <input id="nome"
+                                   type="text"
+                                   class="form-control"
+                                   name="nome"
+                                   th:value="${disciplina.nome}">
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
     <footer></footer>
 </body>
 </html>

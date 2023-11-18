@@ -22,11 +22,22 @@ public class DisciplinaService {
     }
 
     public List<Disciplina> listAll() {
-        return disciplinaRepository.findAll();
+        return disciplinaRepository.findAllByOrderByIdAsc();
     }
 
     public Disciplina findById(Long id) {
         return disciplinaRepository.findById(id).get();
     }
 
+    public void delete(Long id) {
+        disciplinaRepository.deleteById(id);
+    }
+
+    public List<Disciplina> listByFilter(String nome) {
+        if (nome.isEmpty()) {
+            return disciplinaRepository.findAll();
+        } else {
+            return disciplinaRepository.findAllByNomeContainingIgnoreCaseOrderByIdAsc(nome);
+        }
+    }
 }
