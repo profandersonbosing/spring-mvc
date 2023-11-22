@@ -34,64 +34,64 @@
             </div>
           </nav>
         <hr/>
-        <h2>Listagem de Professores</h2>
+        <h2 th:text="'Listagem de Disciplinas do Professor ' + ${professor.getNome()}"></h2>
         <hr/>
     </header>
     <main>
       <div class="container-fluid">
-          <div class="row">
-              <div class="col-12">
-                  <form action="/professor/filtrar" method="GET">
-                          <div class="mb-3">
-                              <label for="nome" class="form-label">Pesquisa por nome:</label>
-                              <input id="nome"
-                                     type="text"
-                                     class="form-control mb-3"
-                                     name="nome">
-                          <button type="submit" class="btn btn-primary">Pesquisar</button>
+              <div class="row" th:if="${not #lists.isEmpty(msg)}">
+                  <div th:each = "m : ${msg}">
+                      <div class="alert alert-warning" role="alert" th:text = "${m}">
+                          A simple warning alert—check it out!
                       </div>
-                  </form>
+                  </div>
               </div>
-          </div>
+              <div class="row justify-content-center card">
+                  <div class="col-6">
+                      <form  class="card-body"
+                             method="POST"
+                             th:action="@{${professor.id} +'/adicionar/'}">
+                          <div class="mb-3">
+                              <label for="disciplina" class="form-label">Disciplinas</label>
+                              <select id="disciplina"
+                                      class="form-select"
+                                      aria-label="Default select example"
+                                      name="idDisciplina">
+                                  <option value="0">Selecione a Disciplina que o Professor irá Ministrar</option>
+                                  <option th:each="disciplina : ${disciplinas}"
+                                          th:value="${disciplina.id}"
+                                          th:text="${disciplina.nome}">
+                              </select>
+
+                          </div>
+                          <button type="submit" class="btn btn-success">Adicionar</button>
+                          <button type="submit"
+                                  class="btn btn-danger"
+                                  onclick="window.history.go(-1); return false;">Voltar</button>
+                      </form>
+                  </div>
+              </div>
+          <hr>
         <div class="row">
             <div class="col-12">
                 <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nome do Professor</th>
-                        <th scope="col">Qtd. Disciplinas</th>
-                          <th scope="col">Disciplinas</th>
-                        <th scope="col"></th>
+                        <th scope="col">Nome da Disciplina</th>
                         <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="professor : ${professores}">
-                        <th th:text="${professor.id}" scope="row">1</th>
-                        <td th:text="${professor.nome}">Mark</td>
-                        <td >
-                            <span class="badge text-bg-warning" th:text="${#lists.size(professor.disciplinas)}">Danger</span>
-                        </td>
+                      <tr th:each="disciplina : ${professor.disciplinas}">
+                        <th th:text="${disciplina.id}" scope="row">1</th>
+                        <td th:text="${disciplina.nome}">Mark</td>
                           <td>
-                              <a  class="btn btn-warning" th:href="@{'professor/disciplinas/editar/'+${professor.id}}" >Disciplinas</a>
-                          </td>
-                        <td>
-                            <a  class="btn btn-primary" th:href="@{'professor/editar/'+${professor.id}}" >Editar</a>
-                        </td>
-                          <td>
-                              <a  class="btn btn-danger" th:href="@{'professor/remover/'+${professor.id}}" >Deletar</a>
+                              <a  class="btn btn-danger" th:href="@{${professor.id} +'/remover/'+${disciplina.id}}">Remover</a>
                           </td>
                       </tr>
                     </tbody>
                   </table>
-            </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-12">
-                <form action="/professor/criar" method="GET">
-                    <button type="submit" class="btn btn-success mb-3">Cadastrar</button>
-                </form>
             </div>
         </div>
     </div>

@@ -33,9 +33,68 @@
               </div>
             </div>
           </nav>
+        <hr/>
+        <h2>Listagem de Professores</h2>
+        <hr/>
     </header>
     <main>
-        
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-12">
+                  <form action="/professor/filtrar" method="GET">
+                          <div class="mb-3">
+                              <label for="nome" class="form-label">Pesquisa por nome:</label>
+                              <input id="nome"
+                                     type="text"
+                                     class="form-control mb-3"
+                                     name="nome">
+                          <button type="submit" class="btn btn-primary">Pesquisar</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome do Professor</th>
+                        <th scope="col">Qtd. Disciplinas</th>
+                          <th scope="col">Disciplinas</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="professor : ${professores}">
+                        <th th:text="${professor.id}" scope="row">1</th>
+                        <td th:text="${professor.nome}">Mark</td>
+                        <td >
+                            <span class="badge text-bg-warning" th:text="${#lists.size(professor.disciplinas)}">Danger</span>
+                        </td>
+                          <td>
+                              <a  class="btn btn-warning" th:href="@{'professor/disciplinas/editar/'+${professor.id}}" >Disciplinas</a>
+                          </td>
+                        <td>
+                            <a  class="btn btn-primary" th:href="@{'professor/editar/'+${professor.id}}" >Editar</a>
+                        </td>
+                          <td>
+                              <a  class="btn btn-danger" th:href="@{'professor/remover/'+${professor.id}}" >Deletar</a>
+                          </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12">
+                <form action="/professor/criar" method="GET">
+                    <button type="submit" class="btn btn-success mb-3">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
     </main>
     <footer></footer>
 </body>
