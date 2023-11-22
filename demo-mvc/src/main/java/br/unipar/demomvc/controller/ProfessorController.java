@@ -131,4 +131,10 @@ public class ProfessorController {
         return "redirect:/professor/disciplinas/editar/"+id;
     }
 
+    @GetMapping(path = "/remover/{id}")
+    public String removerProfessor(@PathVariable("id") Long id){
+        professorService.delete(id);
+        return "redirect:/professor";
+    }
+
 }
