@@ -19,7 +19,7 @@ public class Professor {
     @Size(min = 5, max = 60)
     private String nome;
 
-    @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(/*orphanRemoval = true,*/ fetch = FetchType.EAGER)
     private List<Disciplina> disciplinas;
 
     public Long getId() {

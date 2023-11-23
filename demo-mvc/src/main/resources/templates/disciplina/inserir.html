@@ -41,14 +41,18 @@
         <div class="container">
             <div class="row" th:if="${not #lists.isEmpty(msg)}">
                 <div th:each = "m : ${msg}">
-                    <div class="alert alert-warning" role="alert" th:text = "${m}">
+                    <div class="alert alert-warning" role="alert"
+                         th:text = "${m}">
                         A simple warning alert—check it out!
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center card">
                 <div class="col-6">
-                    <form  class="card-body" method="POST" action="/disciplina" th:object="${disciplina}">
+                    <form  class="card-body"
+                           method="POST"
+                           action="/disciplina"
+                           th:object="${disciplina}">
                         <div class="mb-3">
                             <label for="id" class="form-label">Código</label>
                             <input id="id"

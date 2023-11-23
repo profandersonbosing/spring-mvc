@@ -44,7 +44,8 @@ public class ProfessorController {
 
     @GetMapping(path = "/filtrar")
     public String filtrarProfessores(@RequestParam("nome") String nome, RedirectAttributes redirectAttributes){
-        redirectAttributes.addFlashAttribute("professores", professorService.listByFilter(nome));
+        redirectAttributes.addFlashAttribute("professores",
+                professorService.listByFilter(nome));
         return "redirect:/professor";
     }
 

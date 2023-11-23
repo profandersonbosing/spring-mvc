@@ -29,7 +29,8 @@ public class DisciplinaController {
         ModelAndView modelAndView = new ModelAndView("disciplina/listar");
 
         if (model.containsAttribute("disciplinas"))
-            modelAndView.addObject("disciplinas", model.getAttribute("disciplinas"));
+            modelAndView.addObject("disciplinas",
+                    model.getAttribute("disciplinas"));
         else {
             modelAndView.addObject("disciplinas", disciplinaService.listAll());
         }
@@ -38,8 +39,10 @@ public class DisciplinaController {
     }
 
     @GetMapping(path = "/filtrar")
-    public String filtrarDisciplinas(@RequestParam("nome") String nome, RedirectAttributes redirectAttributes){
-        redirectAttributes.addFlashAttribute("disciplinas", disciplinaService.listByFilter(nome));
+    public String filtrarDisciplinas(@RequestParam("nome") String nome,
+                                     RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("disciplinas",
+                disciplinaService.listByFilter(nome));
         return "redirect:/disciplina";
     }
 
